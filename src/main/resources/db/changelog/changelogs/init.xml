@@ -1,15 +1,91 @@
 
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet id="1" author="someone">
-        <createTable tableName="some_table">
-            <column name="pk" type="varchar(48)">
-                <constraints primaryKey="true" primaryKeyName="some_table_pk_name" />
-            </column>
-        </createTable>
-    </changeSet>
+	<!-- Added Vehicle Table -->
+	<changeSet id="CreateVehicleTable" author="sa">
+		<createTable tableName="vehicle">
+			<column name="MAKEYEAR" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="BRAND" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="MODEL" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="COLOUR" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="REGISTRATION" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="vehicle_id" type="bigint"
+				autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!-- Added Customer Table -->
+	<changeSet id="createCustomerTable" author="sa">
+		<createTable tableName="customer">
+			<column name="birth_date" type="date">
+				<constraints nullable="true" />
+			</column>
+			<column name="driver_licence_number" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="first_name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="last_name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="customer_id" type="bigint"
+				autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!--Added Rental table (Join Table for Many-to-Many) -->
+	<changeSet id="createRentalTable" author="sa">
+		<createTable tableName="rental">
+			<column name="start_date_time" type="datetime">
+				<constraints nullable="true" />
+			</column>
+			<column name="return_date_time" type="datetime">
+				<constraints nullable="true" />
+			</column>
+			<column name="status" type="int">
+				<constraints nullable="true" />
+			</column>
+			<!-- <column name="rental_id" type="bigint" autoIncrement="${autoIncrement}"> 
+				<constraints primaryKey="true" nullable="false" /> </column> -->
+			<column name="customer_id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="vehicle_id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<changeSet id="addForeignKeysToRentalTable" author="sa">
+		<addForeignKeyConstraint
+			baseColumnNames="customer_id" baseTableName="rental"
+			constraintName="fk_rental_customer" referencedColumnNames="customer_id"
+			referencedTableName="customer" onDelete="CASCADE" onUpdate="RESTRICT" />
+		<addForeignKeyConstraint
+			baseColumnNames="vehicle_id" baseTableName="rental"
+			constraintName="fk_rental_vehicle" referencedColumnNames="vehicle_id"
+			referencedTableName="vehicle" onDelete="CASCADE" onUpdate="RESTRICT" />
+	</changeSet>
+
+
 </databaseChangeLog>
