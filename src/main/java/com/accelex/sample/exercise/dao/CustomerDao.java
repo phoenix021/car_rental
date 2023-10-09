@@ -1,17 +1,19 @@
 package com.accelex.sample.exercise.dao;
 
-
 import java.util.List;
 
 import com.accelex.sample.exercise.entity.Customer;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerDao extends CrudRepository<Customer, Long> {
-
-  List<Customer> findByLastName(String lastName);
-
-  Customer findById(long id);
+	/*
+	@Query("SELECT DISTINCT c FROM Customer c LEFT JOIN FETCH c.rentals")
+	List<Customer> findAll();
+	*/
+	
+	Customer findByDriverLicenceNumber(String driversLicense);
 }

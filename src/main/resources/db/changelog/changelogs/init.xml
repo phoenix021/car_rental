@@ -64,15 +64,15 @@
 			<column name="status" type="int">
 				<constraints nullable="true" />
 			</column>
-			<!-- <column name="rental_id" type="bigint" autoIncrement="${autoIncrement}"> 
-				<constraints primaryKey="true" nullable="false" /> </column> -->
+			<column name="rental_id" type="bigint" autoIncrement="${autoIncrement}"> 
+				<constraints primaryKey="true" nullable="false" /> 
+			</column>
 			<column name="customer_id" type="BIGINT">
-				<constraints primaryKey="true" nullable="false" />
+				<!-- <constraints primaryKey="true" nullable="false" />  -->
 			</column>
 			<column name="vehicle_id" type="BIGINT">
-				<constraints primaryKey="true" nullable="false" />
+				<!--<constraints primaryKey="true" nullable="false" /> -->
 			</column>
-
 		</createTable>
 	</changeSet>
 
@@ -85,6 +85,20 @@
 			baseColumnNames="vehicle_id" baseTableName="rental"
 			constraintName="fk_rental_vehicle" referencedColumnNames="vehicle_id"
 			referencedTableName="vehicle" onDelete="CASCADE" onUpdate="RESTRICT" />
+	</changeSet>
+	
+	<changeSet id="addUniqueConstraintForDriversLicence" author="sa">
+    <addUniqueConstraint
+        columnNames="driver_licence_number"
+        constraintName="unique_driver_licence_number"
+        tableName="customer"/>
+	</changeSet>
+	
+	<changeSet id="addUniqueConstraintForVehicleRegistration" author="sa">
+    <addUniqueConstraint
+        columnNames="registration"
+        constraintName="unique_registration"
+        tableName="vehicle"/>
 	</changeSet>
 
 

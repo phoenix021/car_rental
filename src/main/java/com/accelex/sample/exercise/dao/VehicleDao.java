@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VehicleDao extends CrudRepository<Vehicle, Long> {
-	
+
+	Vehicle findByRegistration(String registration);
+
 }
