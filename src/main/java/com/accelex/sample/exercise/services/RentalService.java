@@ -39,22 +39,22 @@ public class RentalService {
 		// pending)
 		Vehicle vehicle = vehicleService.getVehicle(registrationPlate);
 		if (vehicle == null) {
-			log.error("No vehicle found with that registration plate number. Aborting...");
+			System.out.println("No vehicle found with that registration plate number. Aborting...");
 			return null;
 		}
 		Customer customer = customerService.getCustomer(driversLicense);
 		if (customer == null) {
-			log.error("No customer found with that driver licence number. Aborting...");
+			System.out.println("No customer found with that driver licence number. Aborting...");
 			return null;
 		}
 		Rental rentalFromDb = findRentedVehicleByRegistration(registrationPlate);
 		if (rentalFromDb != null) {
 			if (rentalFromDb.getReturnDateTime() == null) {
-				log.error("Vehicle already rented. Aborting...");
+				System.out.println("Vehicle already rented. Aborting...");
 				return null;
 			}
 		} else {
-			log.error("Vehicle not rented. Proceeding...");
+			System.out.println("Vehicle not rented. Proceeding...");
 		}
 
 		Rental newRental = new Rental();
@@ -64,7 +64,7 @@ public class RentalService {
 		newRental.setStatusEnum(Status.OUT);
 
 		Rental savedRental = rentalDao.save(newRental);
-		log.info("Saved rental: " + savedRental.toString());
+		System.out.println("Saved rental: " + savedRental.toString());
 
 		/*
 		// Update Customer's Rentals
@@ -90,7 +90,7 @@ public class RentalService {
 		if (rentals.isEmpty()) {
 			return null;
 		} else {
-			log.info(rentals.toString());
+			System.out.println(rentals.toString());
 			Rental returnRental = new Rental();
 			for (Rental rental : rentals) {
 				if (rental.getReturnDateTime() == null || rental.getStatusEnum().equals(Status.OUT)) {
@@ -115,7 +115,7 @@ public class RentalService {
 
 	public List<VehicleCreationDTO> getRentedVehicles() {
 		List<Rental> rentalsWithoutReturnDate = rentalDao.findByReturnDateTime(null);
-		log.info("Rental entries with no return date: " + rentalsWithoutReturnDate);
+		System.out.println("Rental entries with no return date: " + rentalsWithoutReturnDate);
 		List<VehicleCreationDTO> rentedVehicles = rentalsWithoutReturnDate.stream()
 				.map(rental -> vehicleService.toDto(rental.getVehicle())).collect(Collectors.toList());
 		return rentedVehicles;
@@ -125,8 +125,8 @@ public class RentalService {
 		try {
 			return rentalDao.findRentedVehicleByRegistration(registration);
 		} catch (Exception e) {
-			log.error("Error while geting rented vehicle by registration");
-			log.error(e.toString());
+			System.out.println("Error while geting rented vehicle by registration");
+			System.out.println(e.toString());
 			e.printStackTrace();
 			return null;
 		}

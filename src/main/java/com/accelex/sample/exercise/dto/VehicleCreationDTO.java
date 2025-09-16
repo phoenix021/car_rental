@@ -39,4 +39,68 @@ public class VehicleCreationDTO {
 	@Size(min = 5, max = 15, message = "Registration of the vehicle must be between 5 and 15 characters")
 	@Pattern(regexp = "^[a-zA-Z0-9_]*$", message = "Registration of the vehicle should contain only letters, digits, and underscores")
 	private String registration;
+
+	public VehicleCreationDTO(String makeYear, String brand, String model, String colour, String registration) {
+		// TODO Auto-generated constructor stub
+		this.year = makeYear;
+		this.brand = brand;
+		this.model = model;
+		this.colour = colour;
+		this.registration = registration;
+	}
+
+	public VehicleCreationDTO() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	public String getRegistration() {
+		// TODO Auto-generated method stub
+		return registration;
+	}
+
+	public String getModel() {
+		// TODO Auto-generated method stub
+		return model;
+	}
+
+	public String getBrand() {
+		// TODO Auto-generated method stub
+		return brand;
+	}
+
+	public String getYear() {
+		// TODO Auto-generated method stub
+		return year;
+	}
+
+	public String getColour() {
+		// TODO Auto-generated method stub
+		return colour;
+	}
+
+	public void setBrand(String brand) {
+		// TODO Auto-generated method stub
+		this.brand = brand;
+	}
+
+	public void setColour(String colour) {
+		// TODO Auto-generated method stub
+		this.colour = colour;
+	}
+
+	public void setModel(String model) {
+		// TODO Auto-generated method stub
+		this.model = model;
+	}
+
+	public void setRegistration(String registration) {
+		// TODO Auto-generated method stub
+		this.registration = registration;
+	}
+
+	public void setYear(String makeYear) {
+		// TODO Auto-generated method stub
+		this.year = makeYear;
+	}
 }

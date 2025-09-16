@@ -53,6 +53,11 @@ public class Rental {
 		this.customer = customer;
 	}
 	
+	public Rental() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+
 	public Status getStatusEnum(){
 		for (Status statusEnum : Status.values()) 
 		{ 
@@ -66,7 +71,46 @@ public class Rental {
 	public void setStatusEnum(Status statusEnum) {
 		status = statusEnum.getValue();
 	}
-	
-	
 
+	public LocalDateTime getStartDateTime() {
+		// TODO Auto-generated method stub
+		return startDateTime;
+	}
+
+	public LocalDateTime getReturnDateTime() {
+		// TODO Auto-generated method stub
+		return returnDateTime;
+	}
+
+	public void setCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		this.customer = customer;
+		
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		// TODO Auto-generated method stub
+		this.vehicle = vehicle;
+	}
+
+	public void setStartDateTime(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		this.startDateTime = now;
+		
+	}
+
+	public void setReturnDateTime(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		this.returnDateTime = now;
+	}
+
+	public Customer getCustomer() {
+		// TODO Auto-generated method stub
+		return this.customer;
+	}
+
+	public Vehicle getVehicle() {
+		// TODO Auto-generated method stub
+		return this.vehicle;
+	}
 }

@@ -41,6 +41,60 @@ public class Vehicle { //implements java.io.Serializable?
 		this.registration = registration;
 	}
 
+	public Vehicle() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
 
+	public void setRegistration(String registration) {
+		// TODO Auto-generated method stub
+		this.registration = registration;
+	}
+
+	public void setModel(String model) {
+		// TODO Auto-generated method stub
+		this.model = model;
+		
+	}
+
+	public void setBrand(String brand) {
+		// TODO Auto-generated method stub
+		this.brand = brand;
+	}
+
+	public void setColour(String colour) {
+		// TODO Auto-generated method stub
+		this.colour = colour;
+	}
+
+	public void setMakeYear(String year) {
+		// TODO Auto-generated method stub
+		this.makeYear = year;
+	}
+
+	public String getMakeYear() {
+		// TODO Auto-generated method stub
+		return makeYear;
+	}
+
+	public String getBrand() {
+		// TODO Auto-generated method stub
+		return brand;
+	}
+
+	public String getModel() {
+		// TODO Auto-generated method stub
+		return model;
+	}
+
+	public String getColour() {
+		// TODO Auto-generated method stub
+		return colour;
+	}
+
+	public String getRegistration() {
+		// TODO Auto-generated method stub
+		return registration;
+	}
 
 }

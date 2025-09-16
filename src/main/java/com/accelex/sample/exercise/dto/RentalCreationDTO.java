@@ -24,4 +24,24 @@ public class RentalCreationDTO {
 	@Pattern(regexp = "^[a-zA-Z0-9_]*$", message = "Drivers licence number should contain only letters, digits, and underscores")
 	String driverLicenceNumber;
 
+	public String getRegistration() {
+		// TODO Auto-generated method stub
+		return registration;
+	}
+
+	public String getDriverLicenceNumber() {
+		// TODO Auto-generated method stub
+		return driverLicenceNumber;
+	}
+
+	public void setRegistration(String string) {
+		// TODO Auto-generated method stub
+		this.registration = registration;
+	}
+
+	public void setDriverLicenceNumber(String driverLicenceNumebr) {
+		// TODO Auto-generated method stub
+		this.driverLicenceNumber = driverLicenceNumebr;
+	}
+
 }

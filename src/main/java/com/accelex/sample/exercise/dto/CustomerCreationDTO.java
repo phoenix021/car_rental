@@ -31,4 +31,58 @@ public class CustomerCreationDTO {
 	@NotNull(message = "Birth date can't be null")
 	@Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Date should be in the format yyyy-MM-dd")
 	private String birthDate;
+
+	public CustomerCreationDTO(String firstName, String lastName, String driverLicenceNumber, String birthDate) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.driverLicenceNumber = driverLicenceNumber;
+		this.birthDate = birthDate;
+	}
+
+	public CustomerCreationDTO() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	public String getDriverLicenceNumber() {
+		// TODO Auto-generated method stub
+		return driverLicenceNumber;
+	}
+
+	public String getLastName() {
+		// TODO Auto-generated method stub
+		return lastName;
+	}
+
+	public String getFirstName() {
+		// TODO Auto-generated method stub
+		return firstName;
+	}
+
+	public String getBirthDate() {
+		// TODO Auto-generated method stub
+		return birthDate;
+	}
+
+	public void setFirstName(String firstName) {
+		// TODO Auto-generated method stub
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		// TODO Auto-generated method stub
+		this.lastName = lastName;
+	}
+
+	public void setBirthDate(String birthDate) {
+		// TODO Auto-generated method stub
+		this.birthDate = birthDate;
+	}
+
+	public void setDriverLicenceNumber(String driverLicenceNumber) {
+		// TODO Auto-generated method stub
+		this.driverLicenceNumber = driverLicenceNumber;
+	}
 }

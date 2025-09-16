@@ -25,13 +25,13 @@ public class CustomerService {
     	try {
             return customerDao.save(customer);
     	} catch (DataIntegrityViolationException e) {
-    		log.error("DataIntegrityViolationException trying to save customer");
+    		System.out.println("DataIntegrityViolationException trying to save customer");
     		return null;
     	} catch (DataAccessException e) {
-    		log.error("DataAccessException trying to save customer");
+    		System.out.println("DataAccessException trying to save customer");
     		return null;
     	} catch (Exception e) {
-    		log.error("Exception trying to save customer" + e.toString());
+    		System.out.println("Exception trying to save customer" + e.toString());
     	}
 		return null;
 

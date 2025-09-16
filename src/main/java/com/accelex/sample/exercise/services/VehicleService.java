@@ -25,13 +25,13 @@ public class VehicleService {
     		Vehicle savedVehicle = vehicleDao.save(vehicle);
             return savedVehicle;
     	} catch (DataIntegrityViolationException e) {
-    		log.error("DataIntegrityViolationException trying to save vehicle");
+    		System.out.println("DataIntegrityViolationException trying to save vehicle");
     		return null;
     	} catch (DataAccessException e) {
-    		log.error("DataAccessException trying to save vehicle");
+    		System.out.println("DataAccessException trying to save vehicle");
     		return null;
     	} catch (Exception e) {
-    		log.error("Exception trying to save vehicle");
+    		System.out.println("Exception trying to save vehicle");
     	}
 		return null;
     }

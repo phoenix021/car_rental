@@ -49,7 +49,7 @@ public class VehicleController {
 		System.out.println("****************");
 		System.out.println(savedVehicle);
 		System.out.println("****************");
-		log.info(savedVehicle.toString());
+		System.out.println(savedVehicle.toString());
 		return new ResponseEntity<VehicleCreationDTO>(newVehicleDTO, HttpStatus.CREATED);
 	}
 

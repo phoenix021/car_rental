@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+//import log;
 
 @RestController
 @RequestMapping(value = "/api/customer")
@@ -64,7 +65,7 @@ public class CustomerController {
 		if (savedCustomer == null) {
 			return new ResponseEntity<CustomerCreationDTO>(customerService.toDto(savedCustomer), HttpStatus.BAD_REQUEST);
 		}
-		log.info(savedCustomer.toString());
+		System.out.println(savedCustomer.toString());
 		return new ResponseEntity<CustomerCreationDTO>(customerService.toDto(savedCustomer), HttpStatus.CREATED);
 	}
 
