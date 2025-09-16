@@ -40,12 +40,12 @@ public class RentalService {
 		Vehicle vehicle = vehicleService.getVehicle(registrationPlate);
 		if (vehicle == null) {
 			System.out.println("No vehicle found with that registration plate number. Aborting...");
-			return null;
+			return new RentalDTO();
 		}
 		Customer customer = customerService.getCustomer(driversLicense);
 		if (customer == null) {
 			System.out.println("No customer found with that driver licence number. Aborting...");
-			return null;
+			return new RentalDTO();
 		}
 		Rental rentalFromDb = findRentedVehicleByRegistration(registrationPlate);
 		if (rentalFromDb != null) {
@@ -142,6 +142,6 @@ public class RentalService {
 			rentalDto.setCustomer(customerService.toDto(rental.getCustomer()));
 			return rentalDto;
 		} else
-			return null;
+			return new RentalDTO();
 	}
 }

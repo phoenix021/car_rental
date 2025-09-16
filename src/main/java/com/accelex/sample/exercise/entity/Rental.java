@@ -30,11 +30,11 @@ public class Rental {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long rental_id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "VEHICLE_ID")
     private Vehicle vehicle;
 	
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
     

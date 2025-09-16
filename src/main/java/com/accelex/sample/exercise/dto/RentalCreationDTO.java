@@ -34,7 +34,7 @@ public class RentalCreationDTO {
 		return driverLicenceNumber;
 	}
 
-	public void setRegistration(String string) {
+	public void setRegistration(String registration) {
 		// TODO Auto-generated method stub
 		this.registration = registration;
 	}
@@ -42,6 +42,13 @@ public class RentalCreationDTO {
 	public void setDriverLicenceNumber(String driverLicenceNumebr) {
 		// TODO Auto-generated method stub
 		this.driverLicenceNumber = driverLicenceNumebr;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Rental{" +
+	           "driverLicenceNumber=" + driverLicenceNumber +
+	           ", registration=" + registration;
 	}
 
 }

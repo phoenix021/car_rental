@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RentalDTO {
-	public RentalDTO(LocalDateTime startDateTime2, LocalDateTime returnDateTime2, Status statusEnum, VehicleCreationDTO vehicle,
+	public RentalDTO(LocalDateTime startDateTime, LocalDateTime returnDateTime, Status statusEnum, VehicleCreationDTO vehicle,
 			CustomerCreationDTO customer) {
 		// TODO Auto-generated constructor stub
 		this.startDateTime = startDateTime;
@@ -31,6 +31,7 @@ public class RentalDTO {
 	private Status status;
 	private VehicleCreationDTO vehicle;
 	private CustomerCreationDTO customer;
+	
 	public void setReturnDateTime(LocalDateTime returnDateTime) {
 		// TODO Auto-generated method stub
 		this.returnDateTime = returnDateTime;
@@ -50,6 +51,38 @@ public class RentalDTO {
 	public void setCustomer(CustomerCreationDTO dto) {
 		// TODO Auto-generated method stub
 		this.customer = dto;
+	}
+	
+	public LocalDateTime getReturnDateTime() {
+		// TODO Auto-generated method stub
+		return returnDateTime;
+	}
+	public LocalDateTime getStartDateTime() {
+		// TODO Auto-generated method stub
+		return startDateTime;
+	}
+	public Status getStatus() {
+		// TODO Auto-generated method stub
+		return status;
+	}
+	public VehicleCreationDTO getVehicle() {
+		// TODO Auto-generated method stub
+		return vehicle;
+	}
+	public CustomerCreationDTO getCustomer(CustomerCreationDTO dto) {
+		// TODO Auto-generated method stub
+		return customer;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Rental{" +
+	           ", startDateTime=" + startDateTime +
+	           ", returnDateTime=" + returnDateTime +
+	           ", status=" + status +
+	           ", vehicle=" + (vehicle != null ? vehicle.getRegistration() : "null") +
+	           ", customer=" + (customer != null ? customer.getDriverLicenceNumber() : "null") +
+	           '}';
 	}
 
 }

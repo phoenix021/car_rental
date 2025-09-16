@@ -58,7 +58,7 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
-	public void setFirstName(String firstName2) {
+	public void setFirstName(String firstName) {
 		// TODO Auto-generated method stub
 		this.firstName = firstName;
 	}

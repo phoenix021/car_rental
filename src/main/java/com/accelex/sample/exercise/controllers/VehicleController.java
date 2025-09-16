@@ -43,14 +43,15 @@ public class VehicleController {
 
 		Vehicle savedVehicle = vehicleService.saveVehicle(newVehicle);
 		if (savedVehicle == null) {
-			return new ResponseEntity<VehicleCreationDTO>(vehicleService.toDto(savedVehicle), HttpStatus.BAD_REQUEST);
+		    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		// TODO:transform back to dto
 		System.out.println("****************");
 		System.out.println(savedVehicle);
 		System.out.println("****************");
 		System.out.println(savedVehicle.toString());
-		return new ResponseEntity<VehicleCreationDTO>(newVehicleDTO, HttpStatus.CREATED);
+		return new ResponseEntity<VehicleCreationDTO>(vehicleService.toDto(savedVehicle), HttpStatus.CREATED);
+
 	}
 
 }
