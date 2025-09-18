@@ -1,5 +1,6 @@
 package com.accelex.sample.exercise.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.accelex.sample.exercise.dao.CustomerDao;
@@ -57,8 +58,34 @@ public class CustomerService {
 			return null;
 	}
 	
+	public Customer toEntity(CustomerCreationDTO customerDto) {
+		if (customerDto != null) {
+			Customer customer = new Customer();
+			customer.setFirstName(customerDto.getFirstName());
+			customer.setLastName(customerDto.getLastName());
+			customer.setBirthDate(LocalDate.parse(customerDto.getBirthDate()));
+			customer.setDriverLicenceNumber(customerDto.getDriverLicenceNumber());
+			return customer;
+		} else
+			return null;
+	}
+	
 	public void deleteByDriverLicence(String driverLicenceNumber) {
 	    customerDao.deleteByDriverLicenceNumber(driverLicenceNumber);
+	}
+
+	public void saveAllCustomers(List<Customer> customers) {
+	    for (Customer c : customers) {
+	        Customer existing = customerDao.findByDriverLicenceNumber(c.getDriverLicenceNumber());
+	        if (existing == null) {
+	            customerDao.save(c);
+	        } else {
+	            existing.setBirthDate(c.getBirthDate());
+	            existing.setFirstName(c.getFirstName());
+	            existing.setLastName(c.getLastName());
+	            customerDao.save(existing);
+	        }
+	    }
 	}
 
 }

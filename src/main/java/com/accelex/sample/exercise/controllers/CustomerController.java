@@ -76,5 +76,21 @@ public class CustomerController {
 	    customerService.deleteByDriverLicence(driverLicenceNumber);
 	    return ResponseEntity.noContent().build();
 	}
+	
+	
+	@PostMapping("/bulk")
+	public ResponseEntity<List<CustomerCreationDTO>> uploadCustomersBulk(@Valid @RequestBody List<CustomerCreationDTO> customers) {
+	    List<Customer> customerEntities = customers.stream()
+	        .map(customerService::toEntity)
+	        .collect(Collectors.toList());
+
+	    customerService.saveAllCustomers(customerEntities);
+
+	    List<CustomerCreationDTO> savedDTOs = customerEntities.stream()
+	        .map(customerService::toDto)
+	        .collect(Collectors.toList());
+
+	    return new ResponseEntity<>(savedDTOs, HttpStatus.OK);
+	}
 
 }
