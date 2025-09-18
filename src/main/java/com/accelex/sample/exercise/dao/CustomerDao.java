@@ -15,5 +15,9 @@ public interface CustomerDao extends CrudRepository<Customer, Long> {
 	List<Customer> findAll();
 	*/
 	
+    void deleteByDriverLicenceNumber(String driverLicenceNumber);
+	
 	Customer findByDriverLicenceNumber(String driversLicense);
+	
+	
 }

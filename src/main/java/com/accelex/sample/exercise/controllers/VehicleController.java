@@ -6,9 +6,13 @@ import com.accelex.sample.exercise.entity.Customer;
 import com.accelex.sample.exercise.entity.Vehicle;
 import com.accelex.sample.exercise.services.VehicleService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,5 +57,35 @@ public class VehicleController {
 		return new ResponseEntity<VehicleCreationDTO>(vehicleService.toDto(savedVehicle), HttpStatus.CREATED);
 
 	}
+	
+	
+	@GetMapping("/getAll")
+    public ResponseEntity<List<VehicleCreationDTO>> getAllVehicles() {
+        List<VehicleCreationDTO> vehicles = vehicleService.getAllVehicles()
+                .stream()
+                .map(vehicleService::toDto)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(vehicles, HttpStatus.OK);
+    }
+	
+	
+	@PostMapping("/bulk")
+	public ResponseEntity<List<VehicleCreationDTO>> uploadVehiclesBulk(@RequestBody List<VehicleCreationDTO> vehicles) {
+	    // Convert DTOs to entities
+	    List<Vehicle> vehiclesEntities = vehicles.stream()
+	        .map(vehicleService::toEntity)  // Convert DTO to entity
+	        .collect(Collectors.toList());
+
+	    // Save all vehicles (make sure your service method saves the list)
+	    vehicleService.saveAllVehicles(vehiclesEntities);
+
+	    // Optionally convert saved entities back to DTOs to return
+	    List<VehicleCreationDTO> savedDTOs = vehiclesEntities.stream()
+	        .map(vehicleService::toDto)
+	        .collect(Collectors.toList());
+
+	    return new ResponseEntity<>(savedDTOs, HttpStatus.OK);
+	}
+
 
 }

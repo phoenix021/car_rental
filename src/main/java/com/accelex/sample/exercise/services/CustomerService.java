@@ -56,5 +56,9 @@ public class CustomerService {
 		} else
 			return null;
 	}
+	
+	public void deleteByDriverLicence(String driverLicenceNumber) {
+	    customerDao.deleteByDriverLicenceNumber(driverLicenceNumber);
+	}
 
 }

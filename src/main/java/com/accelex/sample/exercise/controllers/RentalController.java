@@ -1,10 +1,12 @@
 package com.accelex.sample.exercise.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.accelex.sample.exercise.dto.RentalCreationDTO;
 import com.accelex.sample.exercise.dto.RentalDTO;
 import com.accelex.sample.exercise.dto.VehicleCreationDTO;
+import com.accelex.sample.exercise.entity.Vehicle;
 import com.accelex.sample.exercise.services.RentalService;
 
 import org.springframework.beans.factory.annotation.Autowired;

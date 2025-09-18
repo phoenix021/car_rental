@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,6 +69,12 @@ public class CustomerController {
 		}
 		System.out.println(savedCustomer.toString());
 		return new ResponseEntity<CustomerCreationDTO>(customerService.toDto(savedCustomer), HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/delete/{driverLicenceNumber}")
+	public ResponseEntity<Void> deleteCustomer(@PathVariable String driverLicenceNumber) {
+	    customerService.deleteByDriverLicence(driverLicenceNumber);
+	    return ResponseEntity.noContent().build();
 	}
 
 }

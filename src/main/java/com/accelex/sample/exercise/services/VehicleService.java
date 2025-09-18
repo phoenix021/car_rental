@@ -1,5 +1,6 @@
 package com.accelex.sample.exercise.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.accelex.sample.exercise.dao.VehicleDao;
@@ -61,5 +62,44 @@ public class VehicleService {
 		} else
 			return null;
 	}
+	
+	public Vehicle toEntity(VehicleCreationDTO vehicleDto) {
+		if (vehicleDto != null)
+		{
+			Vehicle vehicleEntity = new Vehicle();
+			vehicleEntity.setBrand(vehicleDto.getBrand());
+			vehicleEntity.setColour(vehicleDto.getColour());
+			vehicleEntity.setModel(vehicleDto.getModel());
+			vehicleEntity.setRegistration(vehicleDto.getRegistration());
+			vehicleEntity.setMakeYear(vehicleDto.getYear());
+			return vehicleEntity;
+		} else
+			return null;
+	}
+	
+	public List<Vehicle> getAllVehicles() {
+	    List<Vehicle> result = new ArrayList<>();
+	    vehicleDao.findAll().forEach(result::add);
+	    return result;
+	}
+
+	public void saveAllVehicles(List<Vehicle> vehicles) {
+	    for (Vehicle v : vehicles) {
+	        Vehicle existing = vehicleDao.findByRegistration(v.getRegistration());
+	        if (existing == null) {
+	            vehicleDao.save(v);
+	        } else {
+	            // Optionally update fields or skip
+	            existing.setBrand(v.getBrand());
+	            existing.setModel(v.getModel());
+	            existing.setColour(v.getColour());
+	            existing.setMakeYear(v.getMakeYear());
+	            vehicleDao.save(existing);
+	        }
+	    }
+	}
+
+
+
 
 }
