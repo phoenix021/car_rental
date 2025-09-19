@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.accelex.sample.exercise.dto.CustomerCreationDTO;
+import com.accelex.sample.exercise.dto.CustomerRentalsDTO;
 import com.accelex.sample.exercise.dao.RentalDao;
 import com.accelex.sample.exercise.dto.RentalDTO;
 import com.accelex.sample.exercise.dto.VehicleCreationDTO;
@@ -143,5 +145,28 @@ public class RentalService {
 			return rentalDto;
 		} else
 			return new RentalDTO();
+	}
+
+
+	public List<CustomerRentalsDTO> getRentalsByDriverLicence(
+			String driverLicenceNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public List<RentalDTO> getCustomerRentalHistory(String driverLicenceNumber) {
+	    List<Rental> rentals = rentalDao.findAllByCustomerDriverLicenceNumber(driverLicenceNumber);
+
+	    return rentals.stream().map(r -> {
+	    	RentalDTO rentalDto = new RentalDTO();
+	        Vehicle v = r.getVehicle();
+	        VehicleCreationDTO  vehicleDto = vehicleService.toDto(v);
+	        CustomerCreationDTO customerDto = customerService.toDto(r.getCustomer());
+	        rentalDto.setVehicle(vehicleDto);
+	        rentalDto.setStartDateTime(r.getStartDateTime());
+	        rentalDto.setReturnDateTime(r.getReturnDateTime());
+	        rentalDto.setStatus(r.getStatusEnum());
+	        return rentalDto;
+	    }).toList();
 	}
 }

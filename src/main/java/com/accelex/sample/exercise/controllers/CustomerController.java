@@ -12,13 +12,18 @@ import com.accelex.sample.exercise.controllers.mapping.CustomerMapper;
 import com.accelex.sample.exercise.controllers.mapping.Mapper;
 import com.accelex.sample.exercise.dto.CustomerCreationDTO;
 import com.accelex.sample.exercise.dto.CustomerDTO;
+import com.accelex.sample.exercise.dto.CustomerRentalsDTO;
+import com.accelex.sample.exercise.dto.RentalDTO;
 import com.accelex.sample.exercise.entity.Customer;
 import com.accelex.sample.exercise.services.CustomerService;
+import com.accelex.sample.exercise.services.RentalService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +42,9 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	RentalService rentalService;
 
 	@RequestMapping(value = "/getAll")
 	public ResponseEntity<List<CustomerDTO>> getAll() {
@@ -77,6 +85,18 @@ public class CustomerController {
 	    return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping("/{driverLicenceNumber}/rentals")
+	public ResponseEntity<List<RentalDTO>> getAllCustomerRentals(@PathVariable String driverLicenceNumber) {
+	    List<RentalDTO> rentals = rentalService.getCustomerRentalHistory(driverLicenceNumber);
+	    return new ResponseEntity<>(rentals, HttpStatus.OK);
+	}
+
+	 @GetMapping("/get/{licenceNumber}")
+	    public ResponseEntity<CustomerCreationDTO> getCustomerByLicence(@PathVariable String licenceNumber) {
+	        CustomerCreationDTO customerDto = customerService.toDto(customerService.findByDriverLicenceNumber(licenceNumber));
+
+	        return new ResponseEntity<CustomerCreationDTO>(customerDto, HttpStatus.OK);
+	    }
 	
 	@PostMapping("/bulk")
 	public ResponseEntity<List<CustomerCreationDTO>> uploadCustomersBulk(@Valid @RequestBody List<CustomerCreationDTO> customers) {

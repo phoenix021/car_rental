@@ -23,4 +23,9 @@ public interface RentalDao extends CrudRepository<Rental, Long> {
 	
 	@Query("SELECT r FROM Rental r WHERE r.vehicle.registration = :registration AND r.returnDateTime IS NULL")
 	Rental findRentedVehicleByRegistration(@Param("registration") String registration);
+	
+	@Query("SELECT r FROM Rental r JOIN r.customer c WHERE c.driverLicenceNumber = :driverLicenceNumber")
+	List<Rental> findAllByCustomerDriverLicenceNumber(@Param("driverLicenceNumber") String driverLicenceNumber);
+
+
 }

@@ -88,4 +88,8 @@ public class CustomerService {
 	    }
 	}
 
+	public Customer findByDriverLicenceNumber(String licenceNumber) {
+		return customerDao.findByDriverLicenceNumber(licenceNumber);
+	}
+
 }
